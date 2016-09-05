@@ -4,25 +4,91 @@
         <record model="ir.ui.view" id="truck_form_view">
             <field name="name">truck.form</field>
             <field name="model">truck</field>
-            <field name="inherit_id" ref="vehicle.vehicle_form_view"/>
             <field name="arch" type="xml">
-                <div position="after">
-                    <group name="info">
-                        <group name="driver">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
                             <field name="driver"/>
                             <field name="car_plates"/>
                         </group>
-                    </group>
-                </div>
-                <group name="weights" position="inside">
-                    <group col="3">
-                        <field name="input_kilos"/>
-                    </group>
-                    <group col="3">
-                        <field name="output_kilos"/>
-                    </group>
-                </group>
+                        <group name="product_info">
+                            <field name="product_id"/>
+                            <field name="location_id"/>
+                        </group>
+                        <group name="characteristics" col="3">
+                                <group name="sensors">
+                                    <field name="humidity_rate"/>
+                                    <field name="density"/>
+                                    <field name="temperature"/>
+                                </group>
+                            <group name="rates">
+                                <field name="damage_rate"/>
+                                <field name="break_rate"/>
+                                <field name="impurity_rate"/>
+                            </group>
+                            <group name="transgenic">
+                                <field name="transgenic"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="ticket"/>
+                        </group>
+                        <group>
+                            <group col="1" name="weights">
+                                <group>
+                                    <field name="input_kilos"/>
+                                    <field name="output_kilos"/>
+                                    <field name="raw_kilos"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="humid_kilos"/>
+                                <field name="damaged_kilos"/>
+                                <field name="broken_kilos"/>
+                                <field name="impure_kilos"/>
+                                <field name="clean_kilos"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="stock_picking" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                        </group>
+                    </sheet>
+                </form>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="truck_tree_view">
+            <field name="name">truck.tree</field>
+            <field name="model">truck</field>
+            <field name="arch" type="xml">
+                <tree string="Truck Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="truck_list_action">
+            <field name="name">Truck</field>
+            <field name="res_model">truck</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first truck
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_action_truck_form"
+            parent="vehicle.menu_zxc"
+            action="truck_list_action"/>
     </data>
 </openerp>
