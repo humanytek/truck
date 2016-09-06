@@ -1,7 +1,7 @@
 from openerp import api, fields, models
 
 
-class Truck(models.Model):
+class Truck(models.AbstractModel):
     _inherit = 'vehicle'
     _name = 'truck'
 

@@ -6,6 +6,5 @@
     'depends': ['vehicle'],
     'data': [
         'security/ir.model.access.csv',
-        'views/truck.xml',
     ]
 }
