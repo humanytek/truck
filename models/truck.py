@@ -7,6 +7,7 @@ class Truck(models.AbstractModel):
 
     driver = fields.Char()
     car_plates = fields.Char()
+    date = fields.Date(default=fields.Date.today)
 
     input_kilos = fields.Float()
     output_kilos = fields.Float()
